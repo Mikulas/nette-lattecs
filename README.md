@@ -18,6 +18,7 @@ Current rule set
 
 - each block definition must have `{** *}` doc comment with properly formatted `@param` annotations
   - blocks closed on the same line are not forced to have annotations (such as the title or scripts blocks)
+- forced block content indentation
 
 Example
 -------
