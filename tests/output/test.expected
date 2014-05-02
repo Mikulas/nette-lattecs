@@ -1,8 +1,0 @@
-array(
-	'Mikulas\\LatteCS\\Rules\\ParamsCommentInEachBlock' => array(
-		array(
-			'Invalid annotation \'@param xoxo\', expected \'@param type $name\'',
-			5,
-		),
-	),
-)

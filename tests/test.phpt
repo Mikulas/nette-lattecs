@@ -36,3 +36,5 @@ Assert::same([
 		["Invalid annotation '@param string basePath', variable name must start with '$'", 5],
 	]
 ], $runner->checkFile(__DIR__ . '/fixtures/invalid_param_dollar.latte'));
+
+Assert::same([], $runner->checkFile(__DIR__ . '/fixtures/valid.latte'));
