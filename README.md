@@ -9,7 +9,7 @@ Usage
 -----
 
 ```sh
-composer require --dev mikulas/lattecs '~0.1.0-alpha'
+composer require --dev mikulas/lattecs '~0.2.0-beta'
 php vendor/bin/lattecs app/
 ```
 
