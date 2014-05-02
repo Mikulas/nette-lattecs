@@ -36,10 +36,12 @@ class CheckCommand extends Command
 		}
 		else
 		{
-			foreach (Finder::findFiles('*.latte')->in($path) as $file => $info)
+			foreach (Finder::findFiles('*.latte')->from($path) as $file => $info)
 			{
+				$output->write('.');
 				$errors[$file] = $runner->checkFile($file);
 			}
+			$output->write("\n");
 		}
 
 		$valid = TRUE;
