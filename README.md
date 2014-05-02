@@ -3,6 +3,14 @@ LatteCS
 
 Coding standard validator for [Latte](https://github.com/nette/latte).
 
+Usage
+-----
+
+```sh
+composer require --dev mikulas/lattecs '~0.1.0-alpha'
+php vendor/bin/lattecs app/
+```
+
 Current rule set
 ----------------
 
