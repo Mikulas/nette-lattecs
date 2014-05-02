@@ -3,6 +3,11 @@ LatteCS
 
 Coding standard validator for [Latte](https://github.com/nette/latte).
 
+Current rule set
+----------------
+
+- each block definition must have `{** *}` doc comment with properly formatted `@param` annotations
+
 Example
 -------
 
