@@ -44,7 +44,6 @@ class ParamsCommentInEachBlock extends Rule
 				}
 
 				$matches = [];
-				var_dump($token->text);
 				if (!preg_match_all('~^\s*[*]\s+(?P<params>@param.*?)$~m', $token->text, $matches))
 				{
 					$this->error("Block #$block is annotated, but no @param was specified.", $token->line);

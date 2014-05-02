@@ -46,6 +46,10 @@ class Runner
 		$this->rules[] = $rule;
 	}
 
+	/**
+	 * @param string $file path
+	 * @return array of errors
+	 */
 	public function checkFile($file)
 	{
 		$content = file_get_contents($file);
@@ -54,11 +58,21 @@ class Runner
 		$errors = [];
 		foreach ($this->rules as $rule)
 		{
-			if ($es = $rule($tokens))
+			foreach($rule($tokens) as $error)
 			{
-				$errors[get_class($rule)] = $es;
+				list($msg, $line) = $error;
+				$es = [
+					'message' => $msg,
+					'line' => $line,
+					'rule' => get_class($rule),
+				];
+				$errors[] = $es;
 			}
 		}
+
+		uasort($errors, function($a, $b) {
+			return $a['line'] < $b['line'];
+		});
 
 		return $errors;
 	}

@@ -10,7 +10,8 @@
     ],
     "require": {
         "symfony/console": "~2.4.4",
-        "latte/latte": "~2.2-rc2"
+        "latte/latte": "~2.2-rc2",
+        "nette/finder": "~2.2-rc1"
     },
     "require-dev": {
         "nette/tester": "~1.1.0"
@@ -19,5 +20,8 @@
         "psr-0": {
             "Mikulas\\LatteCS\\": "src/"
         }
-    }
+    },
+    "bin": [
+        "bin/lattecs"
+    ]
 }

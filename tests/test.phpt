@@ -3,9 +3,7 @@
 use Tester\Assert;
 require __DIR__ . '/bootstrap.php';
 
-$parser = new \Latte\Parser();
-$runner = new \Mikulas\LatteCS\Runner($parser);
-$runner->addRule(new \Mikulas\LatteCS\Rules\ParamsCommentInEachBlock);
+$runner = new \Mikulas\LatteCS\Runner(new \Latte\Parser());
 
 Assert::same([
 	'Mikulas\LatteCS\Rules\ParamsCommentInEachBlock' => [
