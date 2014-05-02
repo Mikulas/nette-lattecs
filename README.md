@@ -1,6 +1,8 @@
 LatteCS
 =======
 
+[![Build Status](https://travis-ci.org/Mikulas/nette-lattecs.svg?branch=master)](https://travis-ci.org/Mikulas/nette-lattecs)
+
 Coding standard validator for [Latte](https://github.com/nette/latte).
 
 Usage
