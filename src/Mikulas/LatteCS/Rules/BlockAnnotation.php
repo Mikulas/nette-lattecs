@@ -5,7 +5,7 @@ namespace Mikulas\LatteCS\Rules;
 use Latte\Token;
 
 
-class ParamsCommentInEachBlock extends Rule
+class BlockAnnotation extends Rule
 {
 
 	/**
