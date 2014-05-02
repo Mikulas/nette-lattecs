@@ -11,6 +11,8 @@ assertError($runner, 'missing_params.latte', 'Block #content is annotated, but n
 assertError($runner, 'invalid_param.latte', "Invalid annotation '@param xoxo', expected '@param type \$name'", 5);
 assertError($runner, 'invalid_param_dollar.latte', "Invalid annotation '@param string basePath', variable name must start with '$'", 5);
 
+Assert::same([], $runner->checkFile(__DIR__ . '/fixtures/inline.latte'));
+
 $rule = 'Mikulas\LatteCS\Rules\ParamsCommentInEachBlock';
 Assert::same([
 	['message' => 'Block #content is not properly annotated', 'line' => 2, 'rule' => $rule],

@@ -16,12 +16,26 @@ class ParamsCommentInEachBlock extends Rule
 	{
 		$expectingComment = FALSE;
 		$block = NULL;
-		foreach ($tokens as $token)
+		foreach ($tokens as $pos => $token)
 		{
 			if ($token->type === $token::MACRO_TAG && $token->name === 'block')
 			{
 				$block = $token->value;
 				$expectingComment = TRUE;
+
+				// if block is closed on same line, do not expect annotation
+				for ($k = $pos + 1; $k < count($tokens); ++$k)
+				{
+					$next = $tokens[$k];
+					if ($next->line !== $token->line)
+					{
+						break;
+					}
+					if ($next->type === $next::MACRO_TAG && $next->name === '/block')
+					{
+						$expectingComment = FALSE;
+					}
+				}
 				continue;
 			}
 
@@ -33,7 +47,8 @@ class ParamsCommentInEachBlock extends Rule
 			{
 				if (!preg_match('~^\s*$~s', $token->text))
 				{
-					$this->error('text, but not just whitespace', $token->line);
+					$this->error("Block #$block is not properly annotated", $token->line);
+					$expectingComment = FALSE;
 				}
 			}
 			else if ($token->type === $token::COMMENT)
