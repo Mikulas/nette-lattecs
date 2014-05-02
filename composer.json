@@ -1,7 +1,9 @@
 {
     "name": "mikulas/lattecs",
     "license": "MIT",
-    "minimum-stability": "rc",
+    "description": "Coding standard validator for Latte templates",
+    "keywords": ["latte", "nette", "cs", "coding standard", "checker", "console", "tool", "validator"],
+    "minimum-stability": "RC",
     "authors": [
         {
             "name": "Mikulas Dite",
