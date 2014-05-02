@@ -21,7 +21,7 @@ class BlockIndentation extends Rule
 			$lineNum = $i + 1;
 
 			$match = [];
-			if (!$blockName && preg_match('~\{block\s+#?(?P<name>[^|]*?)(?:\|.*?)?\}((.*?)(?P<closed>\{/block\b|$))~i', $line, $match))
+			if (!$blockName && preg_match('~\{block\s+#?(?P<name>[^|]*?)(?:\|.*?)?\}((.*?)(?P<closed>\{/block\b|$))?~i', $line, $match))
 			{
 				if (!isset($match['closed']) || !$match['closed'])
 				{
@@ -29,7 +29,7 @@ class BlockIndentation extends Rule
 					continue;
 				}
 			}
-			if ($blockName && preg_match('~\{/block.*?\}.*?(?P<opened>{block\s+#?(?P<name>.*?)(\|.*)?\})~i', $line, $match))
+			if ($blockName && preg_match('~\{/block.*?\}((.*?)(?P<opened>\{block\s+#?(?P<name>[^|]*?)(?:\|.*?)?\}))?~i', $line, $match))
 			{
 				$blockName = NULL;
 				if (isset($match['opened']))

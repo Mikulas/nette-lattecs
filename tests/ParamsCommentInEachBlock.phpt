@@ -3,7 +3,8 @@
 use Tester\Assert;
 require __DIR__ . '/bootstrap.php';
 
-$runner = new \Mikulas\LatteCS\Runner(new \Latte\Parser());
+$rules = [new Mikulas\LatteCS\Rules\ParamsCommentInEachBlock];
+$runner = new \Mikulas\LatteCS\Runner(new \Latte\Parser, $rules);
 
 assertError($runner, 'missing.latte', 'Block #content is not properly annotated', 3);
 assertError($runner, 'missing_star.latte', 'Lattedoc does not start with two stars but it should', 5);
