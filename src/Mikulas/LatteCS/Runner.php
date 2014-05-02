@@ -70,8 +70,8 @@ class Runner
 			}
 		}
 
-		uasort($errors, function($a, $b) {
-			return $a['line'] < $b['line'];
+		usort($errors, function($a, $b) {
+			return $a['line'] > $b['line'];
 		});
 
 		return $errors;
