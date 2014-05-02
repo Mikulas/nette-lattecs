@@ -10,9 +10,10 @@ class ParamsCommentInEachBlock extends Rule
 
 	/**
 	 * @param Token[] $tokens
+	 * @param string $content
 	 * @return mixed
 	 */
-	protected function run(array $tokens)
+	protected function run(array $tokens, $content)
 	{
 		$expectingComment = FALSE;
 		$block = NULL;

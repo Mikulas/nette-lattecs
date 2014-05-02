@@ -58,7 +58,7 @@ class Runner
 		$errors = [];
 		foreach ($this->rules as $rule)
 		{
-			foreach($rule($tokens) as $error)
+			foreach($rule($tokens, $content) as $error)
 			{
 				list($msg, $line) = $error;
 				$es = [
