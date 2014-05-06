@@ -40,7 +40,7 @@ class BlockIndentation extends Rule
 
 			if ($blockName && !preg_match('~^(\s+|$)~', $line))
 			{
-				$this->error("Content in block #$blockName must be indented", $lineNum);
+				$this->error('Indentation', "Content in block #$blockName must be indented", $lineNum);
 			}
 		}
 	}

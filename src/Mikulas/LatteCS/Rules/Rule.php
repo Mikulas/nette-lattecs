@@ -31,9 +31,10 @@ abstract class Rule
 	 */
 	abstract protected function run(array $tokens, $content);
 
-	protected function error($message, $line)
+	protected function error($code, $message, $line)
 	{
-		$this->errors[] = [$message, $line];
+		$code = str_replace('\\', '.', get_class($this)) . ".$code";
+		$this->errors[] = [$code, $message, $line];
 	}
 
 }

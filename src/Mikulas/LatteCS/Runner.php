@@ -60,8 +60,9 @@ class Runner
 		{
 			foreach($rule($tokens, $content) as $error)
 			{
-				list($msg, $line) = $error;
+				list($code, $msg, $line) = $error;
 				$es = [
+					'code' => $code,
 					'message' => $msg,
 					'line' => $line,
 					'rule' => get_class($rule),
