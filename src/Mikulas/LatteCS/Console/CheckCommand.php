@@ -2,10 +2,12 @@
 
 namespace Mikulas\LatteCS\Console;
 
+use Nette\Neon\Neon;
 use Nette\Utils\Finder;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 
@@ -21,12 +23,21 @@ class CheckCommand extends Command
 				InputArgument::REQUIRED,
 				'Path to file or directory to check'
 			)
+			->addOption(
+				'config',
+				'c',
+				InputOption::VALUE_REQUIRED,
+				'Path to config file'
+			)
 		;
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
 		$path = $input->getArgument('path');
+
+		$config = $this->getConfig($input, $output);
+
 		$runner = new \Mikulas\LatteCS\Runner(new \Latte\Parser());
 
 		$errors = [];
@@ -48,6 +59,16 @@ class CheckCommand extends Command
 		$pre = '';
 		foreach ($errors as $file => $es)
 		{
+			$es = array_filter($es, function($e) use ($config) {
+				foreach ($config['skip'] as $skip)
+				{
+					if (strpos($e['code'], $skip) === 0)
+					{
+						return FALSE;
+					}
+				}
+				return TRUE;
+			});
 			if (!$es)
 			{
 				continue;
@@ -60,7 +81,7 @@ class CheckCommand extends Command
 				$output->writeLn("  line $e[line]: <comment>$e[message]</comment>");
 				if ($output->isVerbose())
 				{
-					$output->writeLn("  rule: $e[rule]");
+					$output->writeLn("  code: $e[code]");
 				}
 			}
 			$pre = "\n";
@@ -70,5 +91,26 @@ class CheckCommand extends Command
 		{
 			exit(1);
 		}
+	}
+
+	private function getConfig(InputInterface $input, OutputInterface $output)
+	{
+		$config = [];
+		if ($configFile = $input->getOption('config'))
+		{
+			if (!file_exists($configFile))
+			{
+				$output->writeLn("<error>Config file '$configFile' does not exist</errro>");
+				exit(1);
+			}
+			$raw = file_get_contents($configFile);
+			$config = Neon::decode($raw);
+		}
+		if (!isset($config['skip']) || !is_array($config['skip']))
+		{
+			$config['skip'] = [];
+		}
+
+		return $config;
 	}
 }

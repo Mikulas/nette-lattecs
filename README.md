@@ -13,6 +13,15 @@ composer require --dev mikulas/lattecs '~0.2.0-beta'
 php vendor/bin/lattecs app/
 ```
 
+Example `config.neon` for skipping certain rules:
+```yml
+skip:
+	- Mikulas.LatteCS.Rules.BlockAnnotation.TwoStars
+```
+```sh
+php vendor/bin/lattecs --config config.neon app/
+```
+
 Current rule set
 ----------------
 
