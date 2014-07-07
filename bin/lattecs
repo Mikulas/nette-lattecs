@@ -13,4 +13,5 @@ else
 }
 
 $application = new \Mikulas\LatteCS\Console\Application;
+$application->setAutoExit(TRUE);
 $application->run();
